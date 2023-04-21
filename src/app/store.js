@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import menuReducer from '../app/Slices/MenuSlice';
+import { productSlice } from './Slices/ProductSlice'
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    menu: menuReducer,
+    [productSlice.reducerPath]:productSlice.reducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(productSlice.middleware)
 });

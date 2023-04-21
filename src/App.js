@@ -1,57 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Layout from "./Components/Layout";
+import ShopLayout from "./Components/ShopLayout";
+import UsersList from "./Components/users/UsersList.jsx"
+import PostsList from "./Components/posts/PostsList.jsx"
+import ProductsList from "./Components/products/ProductsList.jsx"
+import ProductDetails from "./Components/products/ProductDetails.jsx"
+import AddNewProduct from "./Components/products/AddNewProduct.jsx"
+import Cart from "./Components/products/Cart.jsx"
+import Home from "./Components/home/Home.jsx"
+
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    
+    <Routes>
+      <Route path="/" element={<Layout />} >
+        <Route index element={<Home />} / >
+        <Route path="users" element={<UsersList />}/>
+        <Route path="posts" element={<PostsList />} />
+        <Route path="products" element={<ShopLayout/>} >
+          <Route index element={<ProductsList />} />
+          <Route path=":productId" element={<ProductDetails />}/ >
+          <Route path="add-product" element={<AddNewProduct />}/ >
+          <Route path="cart" element={<Cart />}/ >
+        </Route >
+      </Route>
+    </Routes>
   );
 }
 
